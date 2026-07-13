@@ -4,11 +4,40 @@ import type { AudioSettings } from '../stores/gameStore'
 
 type Channel = 'music' | 'ambience' | 'sfx'
 
-class AudioManager {
+export function calculateLoopVolume(
+  channel: 'music' | 'ambience',
+  settings: AudioSettings,
+  entryVolume: number,
+  ambienceDuck: number,
+): number {
+  const channelVolume = channel === 'music' ? settings.music : settings.sfx
+  return channelVolume * entryVolume * (channel === 'ambience' ? ambienceDuck : 1)
+}
+
+export class AudioManager {
   private story: Story | null = null
   private settings: AudioSettings = { speech: 1, music: 0.3, sfx: 0.7, muted: false }
   private active: Partial<Record<Channel, { id: string; howl: Howl }>> = {}
   private effectLoops = new Map<string, Howl>()
+  private ambienceDuck = 1
+  private unlockProbe: Howl | null = null
+
+  prepare(story: Story, settings: AudioSettings): void {
+    this.configure(story, settings)
+    if (this.unlockProbe) return
+    const rain = story.audio.ambience.find((entry) => entry.id === 'rain')
+    if (!rain) return
+    this.unlockProbe = new Howl({ src: [rain.src], html5: true, preload: true, volume: 0 })
+  }
+
+  unlock(): void {
+    if (Howler.ctx?.state === 'suspended') void Howler.ctx.resume().catch(() => undefined)
+    const probe = this.unlockProbe
+    if (!probe) return
+    const id = probe.play()
+    probe.once('play', () => probe.stop(id), id)
+    probe.once('playerror', () => undefined, id)
+  }
 
   configure(story: Story, settings: AudioSettings): void {
     this.story = story
@@ -31,8 +60,11 @@ class AudioManager {
     if (!entry) return
     const howl = new Howl({ src: [entry.src], loop: true, volume: 0, html5: true })
     this.active[channel] = { id, howl }
-    howl.play()
-    howl.fade(0, this.channelVolume(channel) * entry.volume, 500)
+    const playId = howl.play()
+    howl.once('playerror', () => {
+      howl.once('unlock', () => howl.play())
+    }, playId)
+    howl.fade(0, calculateLoopVolume(channel, this.settings, entry.volume, this.ambienceDuck), 500)
   }
 
   playSfx(id?: string): void {
@@ -77,6 +109,18 @@ class AudioManager {
     this.syncEffectLoops([])
   }
 
+  setAmbienceDuck(multiplier: number): void {
+    this.ambienceDuck = Math.max(0, Math.min(1, multiplier))
+    const current = this.active.ambience
+    const entry = this.story?.audio.ambience.find((item) => item.id === current?.id)
+    if (!current || !entry) return
+    current.howl.fade(
+      current.howl.volume(),
+      calculateLoopVolume('ambience', this.settings, entry.volume, this.ambienceDuck),
+      300,
+    )
+  }
+
   private channelVolume(channel: Channel): number {
     return channel === 'music' ? this.settings.music : this.settings.sfx
   }
@@ -86,7 +130,7 @@ class AudioManager {
       const current = this.active[channel]
       if (!current || !this.story) return
       const entry = this.story.audio[channel].find((item) => item.id === current.id)
-      current.howl.volume(this.channelVolume(channel) * (entry?.volume ?? 1))
+      current.howl.volume(calculateLoopVolume(channel, this.settings, entry?.volume ?? 1, this.ambienceDuck))
     })
     this.effectLoops.forEach((howl, id) => {
       const entry = this.story?.audio.sfx.find((item) => item.id === id)
