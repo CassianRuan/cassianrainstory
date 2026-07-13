@@ -69,19 +69,23 @@ const qteNodeSchema = baseNodeSchema.extend({
   notes: z.array(qteNoteSchema).min(1),
 })
 
-const runnerObstacleSchema = z.object({
-  id: z.string().min(1),
-  lane: z.number().int().min(0).max(2),
-  at: z.number().positive(),
-  kind: z.enum(['barrier', 'rock', 'fallen-tree']).default('barrier'),
-})
-
 const runnerNodeSchema = baseNodeSchema.extend({
   type: z.literal('road-runner'),
   intro: z.string().min(1),
   rules: gameRulesSchema,
-  goalDistance: z.number().positive(),
-  obstacles: z.array(runnerObstacleSchema).min(1),
+  goalDurationSec: z.number().positive().default(50),
+  gracePeriodSec: z.number().nonnegative().default(2),
+  spawnIntervalStartMs: z.number().int().positive().default(1400),
+  spawnIntervalEndMs: z.number().int().positive().default(900),
+  maxSpeedMultiplier: z.number().min(1).max(2).default(1.35),
+  roadImage: z.string().min(1),
+  carImage: z.string().min(1),
+  obstacleImages: z.object({
+    barrel: z.string().min(1),
+    rock: z.string().min(1),
+    warning: z.string().min(1),
+    crate: z.string().min(1),
+  }),
 })
 
 const quizOptionSchema = z.object({

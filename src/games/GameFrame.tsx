@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 
 interface Props {
+  eyebrow?: string
   title: string
   intro: string
   secondsLeft: number
@@ -18,7 +19,7 @@ export function GameFrame(props: Props) {
     <section className="game-frame" aria-label={props.title}>
       <header className="game-hud">
         <div>
-          <span className="eyebrow">侦探搜寻模式</span>
+          <span className="eyebrow">{props.eyebrow ?? '侦探搜寻模式'}</span>
           <h2>{props.title}</h2>
           <p>{props.intro}</p>
         </div>

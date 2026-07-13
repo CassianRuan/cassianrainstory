@@ -96,16 +96,18 @@
     {
       "id": "night-drive", "type": "road-runner", "title": "暴雨疾驰", "nextNodeId": "bridge-stop",
       "scene": "/stories/pause-in-the-rain/images/prologue/road-02-runner-background.jpg", "music": "investigation", "ambience": "rain", "enterSfx": [], "loopSfx": ["engine-loop", "wet-road-loop", "wipers-loop"], "transition": "push",
-      "intro": "使用方向键或 A / D 变换车道，避开落石、路障与倒木，抵达旧城区。",
-      "rules": { "timeLimitSec": 60, "maxMistakes": 3 }, "goalDistance": 1200,
-      "obstacles": [
-        { "id": "barrier-1", "lane": 1, "at": 170, "kind": "barrier" },
-        { "id": "rock-1", "lane": 0, "at": 330, "kind": "rock" },
-        { "id": "tree-1", "lane": 2, "at": 500, "kind": "fallen-tree" },
-        { "id": "barrier-2", "lane": 1, "at": 680, "kind": "barrier" },
-        { "id": "rock-2", "lane": 2, "at": 835, "kind": "rock" },
-        { "id": "tree-2", "lane": 0, "at": 1010, "kind": "fallen-tree" }
-      ]
+      "intro": "使用方向键或 A / D 快速变换车道，避开油桶、落石、警告牌与木箱，抵达旧城区。",
+      "rules": { "timeLimitSec": 60, "maxMistakes": 3 },
+      "goalDurationSec": 50, "gracePeriodSec": 2,
+      "spawnIntervalStartMs": 1400, "spawnIntervalEndMs": 900, "maxSpeedMultiplier": 1.35,
+      "roadImage": "/stories/pause-in-the-rain/images/runner/malu.jpg",
+      "carImage": "/stories/pause-in-the-rain/images/runner/qiche.png",
+      "obstacleImages": {
+        "barrel": "/stories/pause-in-the-rain/images/runner/youtong.png",
+        "rock": "/stories/pause-in-the-rain/images/runner/shitou.png",
+        "warning": "/stories/pause-in-the-rain/images/runner/jinggaopai.png",
+        "crate": "/stories/pause-in-the-rain/images/runner/xiangzi.png"
+      }
     },
     {
       "id": "bridge-stop", "type": "narrative", "title": "紧急刹车", "nextNodeId": "broken-bridge",
