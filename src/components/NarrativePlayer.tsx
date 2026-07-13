@@ -15,8 +15,10 @@ export function NarrativePlayer({ story, node, onComplete }: { story: Story; nod
   useEffect(() => {
     runId.current += 1
     const currentRun = runId.current
+    const restoreAmbience = () => audioManager.setAmbienceDuck(1)
     setLineIndex(0)
     setPaused(false)
+    audioManager.setAmbienceDuck(0.55)
     const play = async () => {
       for (let index = 0; index < node.lines.length; index += 1) {
         if (currentRun !== runId.current) return
@@ -33,10 +35,13 @@ export function NarrativePlayer({ story, node, onComplete }: { story: Story; nod
         if (currentRun !== runId.current) return
         await new Promise((resolve) => window.setTimeout(resolve, line.pauseAfterMs))
       }
-      if (currentRun === runId.current) onComplete()
+      if (currentRun === runId.current) {
+        restoreAmbience()
+        onComplete()
+      }
     }
     void play()
-    return () => { runId.current += 1; cancelSpeech() }
+    return () => { runId.current += 1; cancelSpeech(); restoreAmbience() }
   }, [node.id]) // node change intentionally restarts the sequence
 
   const togglePause = () => {
@@ -48,6 +53,7 @@ export function NarrativePlayer({ story, node, onComplete }: { story: Story; nod
   const skip = () => {
     runId.current += 1
     cancelSpeech()
+    audioManager.setAmbienceDuck(1)
     onComplete()
   }
 

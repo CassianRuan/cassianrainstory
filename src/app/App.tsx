@@ -47,6 +47,10 @@ export function App() {
   }, [story, store.currentNodeId])
 
   useEffect(() => {
+    if (story) audioManager.prepare(story, store.settings)
+  }, [story])
+
+  useEffect(() => {
     if (!story || !currentNode || !store.hasStarted) return
     audioManager.configure(story, store.settings)
     audioManager.playLoop('music', currentNode.music)
@@ -82,7 +86,10 @@ export function App() {
   if (!story || !storyIndex || !currentNode) return <main className="loading-screen"><div className="loader" /><p>正在点亮木屋里的灯……</p></main>
 
   if (!store.hasStarted) {
-    return <StartScreen story={story} index={storyIndex} hasSave={Boolean(store.currentNodeId)} onStart={() => store.startStory(story.id, story.startNodeId)} />
+    return <StartScreen story={story} index={storyIndex} hasSave={Boolean(store.currentNodeId)} onStart={() => {
+      audioManager.unlock()
+      store.startStory(story.id, story.startNodeId)
+    }} />
   }
 
   return (
