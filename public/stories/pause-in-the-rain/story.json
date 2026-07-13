@@ -13,6 +13,7 @@
   "audio": {
     "music": [
       { "id": "investigation", "src": "/stories/pause-in-the-rain/audio/music/music-investigation.wav", "loop": true, "volume": 0.72 },
+      { "id": "run-bg", "src": "/stories/pause-in-the-rain/audio/music/runBg.wav", "loop": true, "volume": 0.58 },
       { "id": "confrontation", "src": "/stories/pause-in-the-rain/audio/music/music-confrontation.wav", "loop": true, "volume": 0.7 },
       { "id": "ending", "src": "/stories/pause-in-the-rain/audio/music/music-ending.wav", "loop": true, "volume": 0.58 }
     ],
@@ -61,14 +62,14 @@
   "nodes": [
     {
       "id": "office-call", "type": "narrative", "title": "深夜值守", "nextNodeId": "office-phone",
-      "scene": "/stories/pause-in-the-rain/images/prologue/office-01-working.jpg", "music": "investigation", "ambience": "rain", "enterSfx": [], "transition": "flash",
+      "scene": "/stories/pause-in-the-rain/images/prologue/office-01-working.jpg", "ambience": "rain", "enterSfx": [], "transition": "flash",
       "lines": [
         { "character": "narrator", "text": "夜色压在里斯探长的办公室外。暴雨猛烈敲击着窗户，昏暗房间里，只有一盏台灯还亮着。", "pauseAfterMs": 650 }
       ]
     },
     {
       "id": "office-phone", "type": "narrative", "title": "午夜来电", "nextNodeId": "office-departure",
-      "scene": "/stories/pause-in-the-rain/images/prologue/office-02-phone-call.jpg", "music": "investigation", "ambience": "rain", "enterSfx": ["phone-ring"], "transition": "push",
+      "scene": "/stories/pause-in-the-rain/images/prologue/office-02-phone-call.jpg", "ambience": "rain", "enterSfx": ["phone-ring"], "transition": "push",
       "lines": [
         { "character": "narrator", "text": "突兀而尖锐的电话铃声猛然响起。里斯伸手抓起听筒。", "pauseAfterMs": 350 },
         { "character": "rees", "text": "我是里斯。", "pauseAfterMs": 300, "sfx": "phone-pickup" },
@@ -78,7 +79,7 @@
     },
     {
       "id": "office-departure", "type": "narrative", "title": "奔赴现场", "nextNodeId": "road-departure",
-      "scene": "/stories/pause-in-the-rain/images/prologue/office-03-grab-keys.jpg", "music": "investigation", "ambience": "rain", "enterSfx": [], "transition": "push",
+      "scene": "/stories/pause-in-the-rain/images/prologue/office-03-grab-keys.jpg", "ambience": "rain", "enterSfx": [], "transition": "push",
       "lines": [
         { "character": "narrator", "text": "里斯挂断电话。", "pauseAfterMs": 280, "sfx": "phone-hangup" },
         { "character": "narrator", "text": "他抓起桌上的车钥匙和风衣，快步走向门口。", "pauseAfterMs": 450, "sfx": "keys-grab" },
@@ -87,7 +88,7 @@
     },
     {
       "id": "road-departure", "type": "narrative", "title": "雨夜公路", "nextNodeId": "night-drive",
-      "scene": "/stories/pause-in-the-rain/images/prologue/road-01-car-chase.jpg", "music": "investigation", "ambience": "rain", "enterSfx": ["car-start"], "loopSfx": ["engine-loop", "wet-road-loop", "wipers-loop"], "transition": "flash",
+      "scene": "/stories/pause-in-the-rain/images/prologue/road-01-car-chase.jpg", "ambience": "rain", "enterSfx": ["car-start"], "loopSfx": ["engine-loop", "wet-road-loop", "wipers-loop"], "transition": "flash",
       "lines": [
         { "character": "narrator", "text": "黑色轿车的引擎轰然启动。里斯驶上通往旧城区的荒郊公路，雨刮器在挡风玻璃前疯狂摆动。", "pauseAfterMs": 650 },
         { "character": "narrator", "text": "车灯撕开雨幕，前方不断滚落的碎石和倒木迫使他紧握方向盘。", "pauseAfterMs": 700 }
@@ -95,11 +96,11 @@
     },
     {
       "id": "night-drive", "type": "road-runner", "title": "暴雨疾驰", "nextNodeId": "bridge-stop",
-      "scene": "/stories/pause-in-the-rain/images/prologue/road-02-runner-background.jpg", "music": "investigation", "ambience": "rain", "enterSfx": [], "loopSfx": ["engine-loop", "wet-road-loop", "wipers-loop"], "transition": "push",
+      "scene": "/stories/pause-in-the-rain/images/prologue/road-02-runner-background.jpg", "music": "run-bg", "ambience": "rain", "enterSfx": [], "loopSfx": ["engine-loop", "wet-road-loop", "wipers-loop"], "transition": "push",
       "intro": "使用方向键或 A / D 快速变换车道，避开油桶、落石、警告牌与木箱，抵达旧城区。",
       "rules": { "timeLimitSec": 60, "maxMistakes": 3 },
       "goalDurationSec": 50, "gracePeriodSec": 2,
-      "spawnIntervalStartMs": 1400, "spawnIntervalEndMs": 900, "maxSpeedMultiplier": 1.35,
+      "spawnIntervalStartMs": 1800, "spawnIntervalEndMs": 1250, "maxSpeedMultiplier": 1.35,
       "roadImage": "/stories/pause-in-the-rain/images/runner/malu.jpg",
       "carImage": "/stories/pause-in-the-rain/images/runner/qiche.png",
       "obstacleImages": {
@@ -111,14 +112,14 @@
     },
     {
       "id": "bridge-stop", "type": "narrative", "title": "紧急刹车", "nextNodeId": "broken-bridge",
-      "scene": "/stories/pause-in-the-rain/images/prologue/bridge-01-car-stops.jpg", "music": "investigation", "ambience": "rain", "enterSfx": ["car-brake"], "loopSfx": ["flood-loop"], "transition": "flash",
+      "scene": "/stories/pause-in-the-rain/images/prologue/bridge-01-car-stops.jpg", "ambience": "rain", "enterSfx": ["car-brake"], "loopSfx": ["flood-loop"], "transition": "flash",
       "lines": [
         { "character": "narrator", "text": "刺耳的刹车声划破雨夜。黑色轿车猛地停在圣马丁石桥前，轮胎在积水中拖出长长的痕迹。", "pauseAfterMs": 650 }
       ]
     },
     {
       "id": "broken-bridge", "type": "narrative", "title": "断桥", "nextNodeId": "bridge-quiz",
-      "scene": "/stories/pause-in-the-rain/images/prologue/bridge-02-broken-bridge.jpg", "music": "investigation", "ambience": "rain", "enterSfx": [], "loopSfx": ["flood-loop"], "transition": "push",
+      "scene": "/stories/pause-in-the-rain/images/prologue/bridge-02-broken-bridge.jpg", "ambience": "rain", "enterSfx": [], "loopSfx": ["flood-loop"], "transition": "push",
       "lines": [
         { "character": "narrator", "text": "车灯直射前方。原本连接两岸的石桥，中央已经被洪水和泥流彻底冲毁。前方，无路可走。", "pauseAfterMs": 550 },
         { "character": "rees", "text": "该死！桥断了……我要怎样过桥？", "pauseAfterMs": 650 }
@@ -126,7 +127,7 @@
     },
     {
       "id": "bridge-quiz", "type": "quiz", "title": "应急桥梁验证", "nextNodeId": "bridge-rising",
-      "scene": "/stories/pause-in-the-rain/images/prologue/bridge-02-broken-bridge.jpg", "music": "investigation", "ambience": "rain", "enterSfx": ["terminal-activate"], "loopSfx": ["flood-loop"], "transition": "blackout",
+      "scene": "/stories/pause-in-the-rain/images/prologue/bridge-02-broken-bridge.jpg", "ambience": "rain", "enterSfx": ["terminal-activate"], "loopSfx": ["flood-loop"], "transition": "blackout",
       "intro": "雨幕中，一台老旧的应急桥控制器亮起。只有解开校验题，机械桥才会启动。",
       "question": "观察九宫格中桥墩与水流闸门的变化规律，从 A、B、C、D 中选择缺失图形。",
       "questionImage": "/stories/pause-in-the-rain/images/bridge-quiz-question.jpg",
@@ -137,7 +138,7 @@
     },
     {
       "id": "bridge-rising", "type": "narrative", "title": "机械桥升起", "nextNodeId": "bridge-crossing",
-      "scene": "/stories/pause-in-the-rain/images/prologue/bridge-03-mechanical-rise.jpg", "music": "investigation", "ambience": "rain", "enterSfx": ["bridge-rise"], "loopSfx": ["flood-loop"], "transition": "flash",
+      "scene": "/stories/pause-in-the-rain/images/prologue/bridge-03-mechanical-rise.jpg", "ambience": "rain", "enterSfx": ["bridge-rise"], "loopSfx": ["flood-loop"], "transition": "flash",
       "lines": [
         { "character": "rees", "text": "该死，我当警察可不是为了来算数学题的。", "pauseAfterMs": 450 },
         { "character": "narrator", "text": "车窗外响起沉重的轰鸣。一座临时应急机械桥从断桥下方升起，严丝合缝地连接两岸。", "pauseAfterMs": 800, "sfx": "bridge-lock" }
@@ -145,7 +146,7 @@
     },
     {
       "id": "bridge-crossing", "type": "narrative", "title": "冲过断桥", "nextNodeId": "arrival",
-      "scene": "/stories/pause-in-the-rain/images/prologue/bridge-04-car-crossing.jpg", "music": "investigation", "ambience": "rain", "enterSfx": ["car-accelerate"], "loopSfx": ["flood-loop"], "transition": "push",
+      "scene": "/stories/pause-in-the-rain/images/prologue/bridge-04-car-crossing.jpg", "ambience": "rain", "enterSfx": ["car-accelerate"], "loopSfx": ["flood-loop"], "transition": "push",
       "lines": [
         { "character": "narrator", "text": "里斯猛踩油门。黑色轿车化作一道闪电，冲过桥梁，消失在旧城区的暴雨迷雾中。", "pauseAfterMs": 850, "sfx": "car-pass" }
       ]
@@ -253,6 +254,7 @@
       "message": "故事结束",
       "lines": [
         { "character": "narrator", "text": "闪电再次划过。埃文捂着脖子倒在血泊中，里斯握着那把沾血的猎刀，沉默地站在他面前。", "pauseAfterMs": 650 },
+        { "character": "rees", "text": "雨能冲走血迹，却冲不掉真相留下的回声。", "pauseAfterMs": 850 },
         { "character": "narrator", "text": "花斑猫慢慢走到尸体旁，重新趴下。那规律而诡异的呼噜声，再一次填满了房间。", "pauseAfterMs": 900 }
       ]
     }

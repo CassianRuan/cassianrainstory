@@ -15,8 +15,20 @@ describe('story schema', () => {
       const quiz = result.data.nodes.find((node) => node.type === 'quiz')
       expect(quiz?.questionImage).toContain('bridge-quiz-question.jpg')
       expect(quiz?.correctOptionId).toBe('d')
+      const firstInvestigationNode = result.data.nodes.find((node) => node.music === 'investigation')
+      expect(firstInvestigationNode?.id).toBe('arrival')
       const firstConfrontationNode = result.data.nodes.find((node) => node.music === 'confrontation')
       expect(firstConfrontationNode?.id).toBe('rees-enters')
+      const arrivalIndex = result.data.nodes.findIndex((node) => node.id === 'arrival')
+      expect(result.data.nodes.slice(0, arrivalIndex).filter((node) => node.music)).toEqual([
+        expect.objectContaining({ id: 'night-drive', music: 'run-bg' }),
+      ])
+      const runnerMusic = result.data.audio.music.find((entry) => entry.id === 'run-bg')
+      expect(runnerMusic).toEqual(expect.objectContaining({ loop: true, src: expect.stringContaining('runBg.wav') }))
+      const runner = result.data.nodes.find((node) => node.type === 'road-runner')
+      expect(runner).toEqual(expect.objectContaining({ spawnIntervalStartMs: 1800, spawnIntervalEndMs: 1250 }))
+      const ending = result.data.nodes.find((node) => node.type === 'ending')
+      expect(ending?.lines.some((line) => line.character === 'rees' && line.text.includes('真相留下的回声'))).toBe(true)
     }
   })
 

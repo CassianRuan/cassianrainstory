@@ -28,10 +28,13 @@ export function EndingScreen({ story, node, onRestart }: { story: Story; node: E
     return () => { run.current += 1; cancelSpeech() }
   }, [node.id])
 
+  const line = node.lines[lineIndex]
+  const character = story.characters[line?.character]
+
   return (
     <div className="ending-layer">
       {!ready ? (
-        <div className="subtitle-panel ending-subtitle"><div className="speaker">旁白</div><p>{node.lines[lineIndex]?.text}</p><button onClick={() => { run.current += 1; cancelSpeech(); completeStory(story.id); setReady(true) }}>跳过朗诵 ›</button></div>
+        <div className="subtitle-panel ending-subtitle"><div className="speaker">{character?.name ?? '旁白'}</div><p>{line?.text}</p><button onClick={() => { run.current += 1; cancelSpeech(); completeStory(story.id); setReady(true) }}>跳过朗诵 ›</button></div>
       ) : (
         <div className="ending-card"><span>THE END</span><h1>{node.message}</h1><div className="ornament">◆</div><p>暴雨终会停下，但有些声音，会永远留在黑暗里。</p><button className="primary-button" onClick={onRestart}>重新开始</button></div>
       )}
