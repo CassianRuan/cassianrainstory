@@ -4,6 +4,7 @@ dist/
 coverage/
 materials/
 materials.zip
+prologue-materials.zip
 *.log
 *.tsbuildinfo
 vite.config.js

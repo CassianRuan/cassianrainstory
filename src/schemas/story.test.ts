@@ -9,9 +9,12 @@ describe('story schema', () => {
     const result = storySchema.safeParse(config)
     expect(result.success).toBe(true)
     if (result.success) {
-      expect(result.data.nodes).toHaveLength(16)
+      expect(result.data.nodes).toHaveLength(21)
       expect(result.data.nodes.some((node) => node.type === 'road-runner')).toBe(true)
       expect(result.data.nodes.some((node) => node.type === 'quiz')).toBe(true)
+      const quiz = result.data.nodes.find((node) => node.type === 'quiz')
+      expect(quiz?.questionImage).toContain('bridge-quiz-question.jpg')
+      expect(quiz?.correctOptionId).toBe('d')
     }
   })
 

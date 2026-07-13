@@ -49,7 +49,7 @@ export function RoadRunnerGame({ node, onComplete }: { node: RunnerNode; onCompl
         if (obstacle) {
           setHitIds((ids) => [...ids, obstacle.id])
           session.makeMistake('车辆撞上了障碍')
-          audioManager.playSfx('thunder-strike')
+          audioManager.playSfx('obstacle-hit')
         }
         return next
       })

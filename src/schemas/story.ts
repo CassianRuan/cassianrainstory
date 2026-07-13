@@ -25,6 +25,7 @@ const baseNodeSchema = z.object({
   music: z.string().optional(),
   ambience: z.string().optional(),
   enterSfx: z.array(z.string()).default([]),
+  loopSfx: z.array(z.string()).default([]),
   transition: z.enum(['fade', 'push', 'flash', 'blackout']).default('fade'),
 })
 
@@ -92,6 +93,7 @@ const quizNodeSchema = baseNodeSchema.extend({
   type: z.literal('quiz'),
   intro: z.string().min(1),
   question: z.string().min(1),
+  questionImage: z.string().min(1).optional(),
   options: z.array(quizOptionSchema).min(2),
   correctOptionId: z.string().min(1),
   wrongMessage: z.string().min(1),
