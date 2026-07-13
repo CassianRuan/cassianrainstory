@@ -68,6 +68,36 @@ const qteNodeSchema = baseNodeSchema.extend({
   notes: z.array(qteNoteSchema).min(1),
 })
 
+const runnerObstacleSchema = z.object({
+  id: z.string().min(1),
+  lane: z.number().int().min(0).max(2),
+  at: z.number().positive(),
+  kind: z.enum(['barrier', 'rock', 'fallen-tree']).default('barrier'),
+})
+
+const runnerNodeSchema = baseNodeSchema.extend({
+  type: z.literal('road-runner'),
+  intro: z.string().min(1),
+  rules: gameRulesSchema,
+  goalDistance: z.number().positive(),
+  obstacles: z.array(runnerObstacleSchema).min(1),
+})
+
+const quizOptionSchema = z.object({
+  id: z.string().min(1),
+  text: z.string().min(1),
+})
+
+const quizNodeSchema = baseNodeSchema.extend({
+  type: z.literal('quiz'),
+  intro: z.string().min(1),
+  question: z.string().min(1),
+  options: z.array(quizOptionSchema).min(2),
+  correctOptionId: z.string().min(1),
+  wrongMessage: z.string().min(1),
+  successMessage: z.string().min(1),
+})
+
 const endingNodeSchema = baseNodeSchema.extend({
   type: z.literal('ending'),
   message: z.string().min(1),
@@ -79,6 +109,8 @@ export const storyNodeSchema = z.discriminatedUnion('type', [
   objectHuntNodeSchema,
   spotDifferenceNodeSchema,
   qteNodeSchema,
+  runnerNodeSchema,
+  quizNodeSchema,
   endingNodeSchema,
 ])
 
@@ -119,6 +151,9 @@ export const storySchema = z.object({
     if (node.nextNodeId && !ids.has(node.nextNodeId)) {
       context.addIssue({ code: 'custom', path: ['nodes', index, 'nextNodeId'], message: `后续节点 ${node.nextNodeId} 不存在` })
     }
+    if (node.type === 'quiz' && !node.options.some((option) => option.id === node.correctOptionId)) {
+      context.addIssue({ code: 'custom', path: ['nodes', index, 'correctOptionId'], message: '正确答案必须存在于选项中' })
+    }
   })
 })
 
@@ -138,6 +173,8 @@ export type NarrativeNode = Extract<StoryNode, { type: 'narrative' }>
 export type ObjectHuntNode = Extract<StoryNode, { type: 'object-hunt' }>
 export type SpotDifferenceNode = Extract<StoryNode, { type: 'spot-difference' }>
 export type QteNode = Extract<StoryNode, { type: 'keyboard-qte' }>
+export type RunnerNode = Extract<StoryNode, { type: 'road-runner' }>
+export type QuizNode = Extract<StoryNode, { type: 'quiz' }>
 export type EndingNode = Extract<StoryNode, { type: 'ending' }>
 export type Region = z.infer<typeof regionSchema>
 export type StoryIndex = z.infer<typeof storyIndexSchema>

@@ -13,6 +13,8 @@ import { EndingScreen } from '../components/EndingScreen'
 import { ObjectHuntGame } from '../games/ObjectHuntGame'
 import { SpotDifferenceGame } from '../games/SpotDifferenceGame'
 import { QteGame } from '../games/QteGame'
+import { RoadRunnerGame } from '../games/RoadRunnerGame'
+import { QuizGame } from '../games/QuizGame'
 
 export function App() {
   const [storyIndex, setStoryIndex] = useState<StoryIndex | null>(null)
@@ -94,6 +96,8 @@ export function App() {
       {currentNode.type === 'object-hunt' && <ObjectHuntGame key={currentNode.id} node={currentNode} onComplete={completeGame} />}
       {currentNode.type === 'spot-difference' && <SpotDifferenceGame key={currentNode.id} node={currentNode} onComplete={completeGame} />}
       {currentNode.type === 'keyboard-qte' && <QteGame key={currentNode.id} node={currentNode} onComplete={completeGame} />}
+      {currentNode.type === 'road-runner' && <RoadRunnerGame key={currentNode.id} node={currentNode} onComplete={completeGame} />}
+      {currentNode.type === 'quiz' && <QuizGame key={currentNode.id} node={currentNode} onComplete={completeGame} />}
       {currentNode.type === 'ending' && <EndingScreen key={currentNode.id} story={story} node={currentNode} onRestart={() => store.restartStory(story.id, story.startNodeId)} />}
       <SettingsPanel story={story} open={settingsOpen} onClose={() => setSettingsOpen(false)} />
     </main>

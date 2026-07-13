@@ -28,7 +28,7 @@ npm run preview
 - 剧情会自动朗读并推进；可以暂停、继续或跳过当前朗诵。
 - 左上角“故事”按钮可以回到已解锁节点，未解锁节点不能越级进入。
 - 右上角“设置”可以分别调整朗诵、音效和音乐音量，并为角色选择本机声音。
-- 三类小游戏均限时 60 秒、最多 3 次错误；失败后可无限重试。
+- 找不同、点击线索、钢琴 QTE 与公路驾驶均限时 60 秒、最多 3 次错误；失败后可无限重试。桥梁答题必须选择正确答案才能继续。
 - 进度和设置保存在当前浏览器的 `localStorage` 中。
 
 ## 新增故事
@@ -39,7 +39,7 @@ npm run preview
 4. 所有点击区域使用相对坐标 `x/y/width/height`，范围为 `0–1`。
 5. 运行 `npm test && npm run build`，配置引用不存在节点时构建测试会失败。
 
-节点类型：`narrative`、`object-hunt`、`spot-difference`、`keyboard-qte` 和 `ending`。应用组件不包含首发故事台词或答案，替换 JSON 即可增加内容。
+节点类型：`narrative`、`object-hunt`、`spot-difference`、`keyboard-qte`、`road-runner`、`quiz` 和 `ending`。应用组件不包含首发故事台词或答案，替换 JSON 即可增加内容。
 
 ## 部署
 

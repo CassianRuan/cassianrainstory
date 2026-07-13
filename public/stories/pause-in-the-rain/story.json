@@ -4,7 +4,7 @@
   "title": "暴雨中的休止符",
   "subtitle": "每一声雷鸣，都在掩盖一个谎言",
   "cover": "/stories/pause-in-the-rain/images/scene-01-cabin-exterior.png",
-  "startNodeId": "arrival",
+  "startNodeId": "office-call",
   "characters": {
     "narrator": { "name": "旁白", "voiceHints": ["zh-CN", "zh"], "rate": 0.84, "pitch": 0.86 },
     "rees": { "name": "里斯", "voiceHints": ["zh-CN", "zh"], "rate": 0.86, "pitch": 0.7 },
@@ -40,6 +40,60 @@
     ]
   },
   "nodes": [
+    {
+      "id": "office-call", "type": "narrative", "title": "午夜来电", "nextNodeId": "night-drive",
+      "scene": "/stories/pause-in-the-rain/images/scene-04-investigation.jpg", "music": "investigation", "ambience": "rain", "enterSfx": ["clock"], "transition": "flash",
+      "lines": [
+        { "character": "narrator", "text": "夜色压在里斯探长的办公室外。暴雨猛烈敲击着窗户，昏暗房间里，只有一盏台灯还亮着。", "pauseAfterMs": 550 },
+        { "character": "narrator", "text": "突兀而尖锐的电话铃声猛然响起。里斯伸手抓起听筒。", "pauseAfterMs": 350 },
+        { "character": "rees", "text": "我是里斯。", "pauseAfterMs": 300 },
+        { "character": "narrator", "text": "接线员的声音从听筒里传来：里斯探长，紧急情况。十五分钟前有人报案，著名音乐家在旧城区排练厅被杀。局长要求你立刻赶到现场。", "pauseAfterMs": 500 },
+        { "character": "rees", "text": "明白，我这就过去。", "pauseAfterMs": 350 },
+        { "character": "narrator", "text": "里斯挂断电话，抓起桌上的车钥匙，冲入暴雨。", "pauseAfterMs": 650 }
+      ]
+    },
+    {
+      "id": "night-drive", "type": "road-runner", "title": "暴雨疾驰", "nextNodeId": "broken-bridge",
+      "scene": "/stories/pause-in-the-rain/images/scene-01-cabin-exterior.png", "music": "confrontation", "ambience": "rain", "enterSfx": ["thunder-distant"], "transition": "push",
+      "intro": "使用方向键或 A / D 变换车道，避开落石、路障与倒木，抵达旧城区。",
+      "rules": { "timeLimitSec": 60, "maxMistakes": 3 }, "goalDistance": 1200,
+      "obstacles": [
+        { "id": "barrier-1", "lane": 1, "at": 170, "kind": "barrier" },
+        { "id": "rock-1", "lane": 0, "at": 330, "kind": "rock" },
+        { "id": "tree-1", "lane": 2, "at": 500, "kind": "fallen-tree" },
+        { "id": "barrier-2", "lane": 1, "at": 680, "kind": "barrier" },
+        { "id": "rock-2", "lane": 2, "at": 835, "kind": "rock" },
+        { "id": "tree-2", "lane": 0, "at": 1010, "kind": "fallen-tree" }
+      ]
+    },
+    {
+      "id": "broken-bridge", "type": "narrative", "title": "断桥", "nextNodeId": "bridge-quiz",
+      "scene": "/stories/pause-in-the-rain/images/scene-01-cabin-exterior.png", "music": "confrontation", "ambience": "rain", "enterSfx": ["thunder-strike"], "transition": "flash",
+      "lines": [
+        { "character": "narrator", "text": "刺耳的刹车声划破雨夜。黑色轿车猛地停在圣马丁石桥前。", "pauseAfterMs": 450 },
+        { "character": "narrator", "text": "车灯直射前方。原本连接两岸的石桥，中央已经被洪水和泥流彻底冲毁。前方，无路可走。", "pauseAfterMs": 550 },
+        { "character": "rees", "text": "该死！桥断了……我要怎样过桥？", "pauseAfterMs": 650 }
+      ]
+    },
+    {
+      "id": "bridge-quiz", "type": "quiz", "title": "应急桥梁验证", "nextNodeId": "bridge-crossing",
+      "scene": "/stories/pause-in-the-rain/images/scene-01-cabin-exterior.png", "music": "confrontation", "ambience": "rain", "enterSfx": [], "transition": "blackout",
+      "intro": "雨幕中，一台老旧的应急桥控制器亮起。只有解开校验题，机械桥才会启动。",
+      "question": "应急桥配重满足 3x + 12 = 30。配重系数 x 应设为多少？",
+      "options": [
+        { "id": "a", "text": "4" }, { "id": "b", "text": "6" }, { "id": "c", "text": "9" }, { "id": "d", "text": "14" }
+      ],
+      "correctOptionId": "b", "wrongMessage": "配重计算不平衡，机械桥拒绝启动。", "successMessage": "配重锁定。应急机械桥正在升起……"
+    },
+    {
+      "id": "bridge-crossing", "type": "narrative", "title": "机械桥", "nextNodeId": "arrival",
+      "scene": "/stories/pause-in-the-rain/images/scene-01-cabin-exterior.png", "music": "confrontation", "ambience": "rain", "enterSfx": ["mechanism"], "transition": "push",
+      "lines": [
+        { "character": "rees", "text": "该死，我当警察可不是为了来算数学题的。", "pauseAfterMs": 450 },
+        { "character": "narrator", "text": "车窗外响起沉重的轰鸣。一座临时应急机械桥从断桥下方升起，严丝合缝地连接两岸。", "pauseAfterMs": 550 },
+        { "character": "narrator", "text": "里斯猛踩油门。黑色轿车化作一道闪电，冲过桥梁，消失在旧城区的暴雨迷雾中。", "pauseAfterMs": 850 }
+      ]
+    },
     {
       "id": "arrival", "type": "narrative", "title": "暴雨来客", "nextNodeId": "crime-scene",
       "scene": "/stories/pause-in-the-rain/images/scene-01-cabin-exterior.png", "music": "investigation", "ambience": "rain", "enterSfx": ["thunder-distant"], "transition": "flash",
