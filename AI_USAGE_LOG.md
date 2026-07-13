@@ -1,5 +1,15 @@
 # AI Usage Log
 
+## 2026-07-13 — GitHub 发布准备
+
+- 任务：将已完成的网站发布到用户指定仓库 `CassianRuan/cassianrainstory`。
+- AI 贡献：检查远端历史，确认仓库仅有空树相关提交；将重复的 `materials/` 与 `materials.zip` 加入忽略规则，保留运行所需的 `public/stories/`；在远端 `main` 历史上创建项目提交。
+- 产物：本地 `main` 分支提交 `ccb18e0`（`Build interactive story game MVP`），包含应用、测试、文档、Vercel 配置及公开运行素材。
+- 验证：所有待提交文件均小于 GitHub 100 MB 单文件限制；本地分支基于远端 `main` 且领先一个项目提交。
+- 失败与修正：HTTPS 推送因当前环境没有 GitHub 凭据而失败；随后发现环境 SSH 身份为另一 GitHub 用户，该身份可读取但无权写入目标仓库，SSH 推送被 GitHub 拒绝。未请求或记录用户密码、Token。
+- 待办：仓库所有者需在当前环境完成自己的 GitHub HTTPS 登录，或为现有 SSH 身份授予协作者写权限，然后重新执行 `git push origin main`。
+- 隐私检查：日志不含仓库凭据、Token、提取码或私人密钥。
+
 ## 2026-07-13 — 故事游戏 MVP 分阶段实现与本地验收
 
 - 任务：严格按照 `docs/STORY_GAME_IMPLEMENTATION_PLAN.md` 实现《暴雨中的休止符》，持续到网站可本地运行并通过测试。
