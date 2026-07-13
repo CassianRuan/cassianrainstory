@@ -10,3 +10,4 @@ prologue-materials.zip
 vite.config.js
 vite.config.d.ts
 .DS_Store
+.worktrees/
