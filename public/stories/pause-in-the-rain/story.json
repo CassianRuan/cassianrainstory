@@ -18,7 +18,7 @@
       { "id": "ending", "src": "/stories/pause-in-the-rain/audio/music/music-ending.wav", "loop": true, "volume": 0.58 }
     ],
     "ambience": [
-      { "id": "rain", "src": "/stories/pause-in-the-rain/audio/ambience/ambience-rain.wav", "loop": true, "volume": 0.62 },
+      { "id": "rain", "src": "/stories/pause-in-the-rain/audio/ambience/ambience-rain.wav", "loop": true, "volume": 0.85 },
       { "id": "fireplace", "src": "/stories/pause-in-the-rain/audio/ambience/ambience-fireplace.wav", "loop": true, "volume": 0.38 }
     ],
     "sfx": [
@@ -100,7 +100,7 @@
       "intro": "使用方向键或 A / D 快速变换车道，避开油桶、落石、警告牌与木箱，抵达旧城区。",
       "rules": { "timeLimitSec": 60, "maxMistakes": 3 },
       "goalDurationSec": 50, "gracePeriodSec": 2,
-      "spawnIntervalStartMs": 1800, "spawnIntervalEndMs": 1250, "maxSpeedMultiplier": 1.35,
+      "spawnIntervalStartMs": 2500, "spawnIntervalEndMs": 1800, "maxSpeedMultiplier": 1.35,
       "roadImage": "/stories/pause-in-the-rain/images/runner/malu.jpg",
       "carImage": "/stories/pause-in-the-rain/images/runner/qiche.png",
       "obstacleImages": {

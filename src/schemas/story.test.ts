@@ -26,7 +26,13 @@ describe('story schema', () => {
       const runnerMusic = result.data.audio.music.find((entry) => entry.id === 'run-bg')
       expect(runnerMusic).toEqual(expect.objectContaining({ loop: true, src: expect.stringContaining('runBg.wav') }))
       const runner = result.data.nodes.find((node) => node.type === 'road-runner')
-      expect(runner).toEqual(expect.objectContaining({ spawnIntervalStartMs: 1800, spawnIntervalEndMs: 1250 }))
+      expect(runner).toEqual(expect.objectContaining({ spawnIntervalStartMs: 2500, spawnIntervalEndMs: 1800 }))
+      const rain = result.data.audio.ambience.find((entry) => entry.id === 'rain')
+      expect(rain).toEqual(expect.objectContaining({
+        src: '/stories/pause-in-the-rain/audio/ambience/ambience-rain.wav',
+        loop: true,
+        volume: 0.85,
+      }))
       const ending = result.data.nodes.find((node) => node.type === 'ending')
       expect(ending?.lines.some((line) => line.character === 'rees' && line.text.includes('真相留下的回声'))).toBe(true)
     }
