@@ -1,0 +1,11 @@
+{
+  "stories": [
+    {
+      "id": "pause-in-the-rain",
+      "title": "暴雨中的休止符",
+      "description": "一位钢琴家死在暴雨夜的木屋里。时间、乐谱与弓弦，都在说谎。",
+      "cover": "/stories/pause-in-the-rain/images/scene-01-cabin-exterior.png",
+      "config": "/stories/pause-in-the-rain/story.json"
+    }
+  ]
+}

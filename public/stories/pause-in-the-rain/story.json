@@ -1,0 +1,150 @@
+{
+  "schemaVersion": 1,
+  "id": "pause-in-the-rain",
+  "title": "暴雨中的休止符",
+  "subtitle": "每一声雷鸣，都在掩盖一个谎言",
+  "cover": "/stories/pause-in-the-rain/images/scene-01-cabin-exterior.png",
+  "startNodeId": "arrival",
+  "characters": {
+    "narrator": { "name": "旁白", "voiceHints": ["zh-CN", "zh"], "rate": 0.84, "pitch": 0.86 },
+    "rees": { "name": "里斯", "voiceHints": ["zh-CN", "zh"], "rate": 0.86, "pitch": 0.7 },
+    "evan": { "name": "埃文", "voiceHints": ["zh-CN", "zh"], "rate": 0.94, "pitch": 0.62 }
+  },
+  "audio": {
+    "music": [
+      { "id": "investigation", "src": "/stories/pause-in-the-rain/audio/music/music-investigation.wav", "loop": true, "volume": 0.72 },
+      { "id": "confrontation", "src": "/stories/pause-in-the-rain/audio/music/music-confrontation.wav", "loop": true, "volume": 0.7 },
+      { "id": "ending", "src": "/stories/pause-in-the-rain/audio/music/music-ending.wav", "loop": true, "volume": 0.58 }
+    ],
+    "ambience": [
+      { "id": "rain", "src": "/stories/pause-in-the-rain/audio/ambience/ambience-rain.wav", "loop": true, "volume": 0.62 },
+      { "id": "fireplace", "src": "/stories/pause-in-the-rain/audio/ambience/ambience-fireplace.wav", "loop": true, "volume": 0.38 }
+    ],
+    "sfx": [
+      { "id": "thunder-distant", "src": "/stories/pause-in-the-rain/audio/sfx/sfx-thunder-distant.wav", "loop": false, "volume": 0.72 },
+      { "id": "thunder-strike", "src": "/stories/pause-in-the-rain/audio/sfx/sfx-thunder-strike.wav", "loop": false, "volume": 1 },
+      { "id": "door", "src": "/stories/pause-in-the-rain/audio/sfx/sfx-door-open.wav", "loop": false, "volume": 0.82 },
+      { "id": "footsteps", "src": "/stories/pause-in-the-rain/audio/sfx/sfx-footsteps-wet.wav", "loop": false, "volume": 0.7 },
+      { "id": "lamp", "src": "/stories/pause-in-the-rain/audio/sfx/sfx-lamp-creak.mp3", "loop": false, "volume": 0.56 },
+      { "id": "cat-purr", "src": "/stories/pause-in-the-rain/audio/sfx/sfx-cat-purr.wav", "loop": false, "volume": 0.65 },
+      { "id": "cat-hiss", "src": "/stories/pause-in-the-rain/audio/sfx/sfx-cat-hiss.mp3", "loop": false, "volume": 0.9 },
+      { "id": "clock", "src": "/stories/pause-in-the-rain/audio/sfx/sfx-clock-stuck.mp3", "loop": false, "volume": 0.82 },
+      { "id": "tea", "src": "/stories/pause-in-the-rain/audio/sfx/sfx-tea-pour.wav", "loop": false, "volume": 0.65 },
+      { "id": "bow", "src": "/stories/pause-in-the-rain/audio/sfx/sfx-bow-tension.wav", "loop": false, "volume": 0.8 },
+      { "id": "paper", "src": "/stories/pause-in-the-rain/audio/sfx/sfx-paper-tear.wav", "loop": false, "volume": 0.82 },
+      { "id": "piano-low", "src": "/stories/pause-in-the-rain/audio/sfx/sfx-piano-low-01.wav", "loop": false, "volume": 0.85 },
+      { "id": "piano-chord", "src": "/stories/pause-in-the-rain/audio/sfx/sfx-piano-chord.wav", "loop": false, "volume": 0.9 },
+      { "id": "mechanism", "src": "/stories/pause-in-the-rain/audio/sfx/sfx-mechanism.wav", "loop": false, "volume": 0.9 },
+      { "id": "fight", "src": "/stories/pause-in-the-rain/audio/sfx/sfx-fight.wav", "loop": false, "volume": 0.82 },
+      { "id": "knife", "src": "/stories/pause-in-the-rain/audio/sfx/sfx-knife-impact.wav", "loop": false, "volume": 0.82 }
+    ]
+  },
+  "nodes": [
+    {
+      "id": "arrival", "type": "narrative", "title": "暴雨来客", "nextNodeId": "crime-scene",
+      "scene": "/stories/pause-in-the-rain/images/scene-01-cabin-exterior.png", "music": "investigation", "ambience": "rain", "enterSfx": ["thunder-distant"], "transition": "flash",
+      "lines": [
+        { "character": "narrator", "text": "暴雨倾盆。闪电划过林间，惨白的光，短暂照亮了那座孤零零的木屋。", "pauseAfterMs": 650 },
+        { "character": "narrator", "text": "雨水沿着窗玻璃蜿蜒而下。屋里只有一盏昏黄吊灯，在黑暗中缓慢摇晃。", "pauseAfterMs": 600 }
+      ]
+    },
+    {
+      "id": "crime-scene", "type": "narrative", "title": "死亡现场", "nextNodeId": "rees-enters",
+      "scene": "/stories/pause-in-the-rain/images/scene-02-crime-room.png", "music": "investigation", "ambience": "rain", "enterSfx": ["lamp", "cat-purr"], "transition": "push",
+      "lines": [
+        { "character": "narrator", "text": "房间中央，钢琴家阿尔伯特低着头坐在扶手椅上，双手垂落，再也不会碰触琴键。", "pauseAfterMs": 650 },
+        { "character": "narrator", "text": "一只花斑猫蜷缩在他的脚边。规律的呼噜声，在死寂中显得格外清晰。", "pauseAfterMs": 550 }
+      ]
+    },
+    {
+      "id": "rees-enters", "type": "narrative", "title": "侦探入场", "nextNodeId": "spot-difference",
+      "scene": "/stories/pause-in-the-rain/images/scene-03-rees-enters.png", "music": "investigation", "ambience": "rain", "enterSfx": ["door", "footsteps"], "transition": "fade",
+      "lines": [
+        { "character": "narrator", "text": "门被猛地推开。里斯探长走进木屋，湿透的风衣滴着水，皮鞋在木地板上留下沉重的印迹。", "pauseAfterMs": 500 },
+        { "character": "rees", "text": "有人动过这里。暴雨冲不掉房间里的谎言。", "pauseAfterMs": 700 }
+      ]
+    },
+    {
+      "id": "spot-difference", "type": "spot-difference", "title": "被改动的现场", "nextNodeId": "investigation",
+      "scene": "/stories/pause-in-the-rain/images/spot-difference-right.jpg", "music": "investigation", "ambience": "rain", "enterSfx": [], "transition": "fade",
+      "intro": "对照里斯进入房间前后的记忆，在右图找出 5 处被改动的痕迹。",
+      "leftImage": "/stories/pause-in-the-rain/images/spot-difference-left.jpg",
+      "rightImage": "/stories/pause-in-the-rain/images/spot-difference-right.jpg",
+      "rules": { "timeLimitSec": 60, "maxMistakes": 3 },
+      "regions": [
+        { "id": "clock", "x": 0.075, "y": 0.49, "width": 0.105, "height": 0.215, "label": "闹钟" },
+        { "id": "teapot", "x": 0.257, "y": 0.495, "width": 0.13, "height": 0.185, "label": "茶壶" },
+        { "id": "wall-arrow", "x": 0.66, "y": 0.17, "width": 0.215, "height": 0.165, "label": "墙上的箭" },
+        { "id": "score", "x": 0.69, "y": 0.445, "width": 0.155, "height": 0.215, "label": "乐谱" },
+        { "id": "cat", "x": 0.505, "y": 0.69, "width": 0.12, "height": 0.205, "label": "花斑猫" }
+      ]
+    },
+    {
+      "id": "investigation", "type": "object-hunt", "title": "关键线索", "nextNodeId": "confrontation",
+      "scene": "/stories/pause-in-the-rain/images/scene-04-investigation.jpg", "music": "investigation", "ambience": "fireplace", "enterSfx": [], "transition": "fade",
+      "intro": "在房间中找出 4 件关键证物。每一次误判，都可能让真相溜走。",
+      "rules": { "timeLimitSec": 60, "maxMistakes": 3 },
+      "regions": [
+        { "id": "clock", "x": 0.07, "y": 0.49, "width": 0.12, "height": 0.215, "label": "老式闹钟", "feedback": "闹钟停在七点零五分。但根据尸斑，死亡时间至少在九点之后。时间被伪造了。" },
+        { "id": "teapot", "x": 0.29, "y": 0.5, "width": 0.105, "height": 0.17, "label": "温热的茶壶", "feedback": "茶壶还有余温。凶手杀人后，仍在这里停留了很久。" },
+        { "id": "bow", "x": 0.545, "y": 0.22, "width": 0.12, "height": 0.36, "label": "装饰弓箭", "feedback": "弓弦上有新鲜松香。这不是装饰品，它最近刚被极力拉满。" },
+        { "id": "score", "x": 0.69, "y": 0.45, "width": 0.16, "height": 0.21, "label": "残缺乐谱", "feedback": "终章乐谱被撕走了。凶手真正寻找的，是乐谱里的秘密。" }
+      ]
+    },
+    {
+      "id": "confrontation", "type": "narrative", "title": "对峙", "nextNodeId": "piano-qte",
+      "scene": "/stories/pause-in-the-rain/images/scene-05-confrontation.jpg", "music": "confrontation", "ambience": "rain", "enterSfx": [], "transition": "push",
+      "lines": [
+        { "character": "evan", "text": "别白费力气了，里斯探长。阿尔伯特的儿子欠了一屁股债，肯定是他为了遗产杀了父亲。", "pauseAfterMs": 450 },
+        { "character": "evan", "text": "我只是个路过的猎户，根本不懂你们城里人的把戏。", "pauseAfterMs": 550 },
+        { "character": "rees", "text": "你确实是猎户，埃文。但你也是阿尔伯特十年前最得意的学生。直到拉弓废掉你的右手，你再也无法弹琴。", "pauseAfterMs": 550 },
+        { "character": "narrator", "text": "埃文的脸色变了。他戴着手套的右手，下意识地缩向身后。", "pauseAfterMs": 450 },
+        { "character": "rees", "text": "你用冰块卡住闹钟，伪造七点的死亡时间。然后用弓弦，从背后勒死了毫无防备的老人。", "pauseAfterMs": 500 },
+        { "character": "rees", "text": "你留下来喝茶，是为了破解阿尔伯特藏在绝笔乐谱中的暗格密码。", "pauseAfterMs": 650 }
+      ]
+    },
+    {
+      "id": "piano-qte", "type": "keyboard-qte", "title": "终章密码", "nextNodeId": "secret-revealed",
+      "scene": "/stories/pause-in-the-rain/images/scene-06-piano.jpg", "music": "confrontation", "ambience": "rain", "enterSfx": [], "transition": "fade",
+      "intro": "音符进入金色判定区时，按下对应按键。",
+      "rules": { "timeLimitSec": 60, "maxMistakes": 3 },
+      "travelMs": 2600, "hitWindowMs": 700,
+      "notes": [
+        { "key": "A", "atMs": 3200 }, { "key": "S", "atMs": 5600 }, { "key": "D", "atMs": 8000 }, { "key": "F", "atMs": 10200 }, { "key": "A", "atMs": 12400 }
+      ]
+    },
+    {
+      "id": "secret-revealed", "type": "narrative", "title": "空暗格", "nextNodeId": "attack",
+      "scene": "/stories/pause-in-the-rain/images/scene-07-secret-room.jpg", "music": "confrontation", "ambience": "rain", "enterSfx": ["mechanism"], "transition": "push",
+      "lines": [
+        { "character": "narrator", "text": "最后一个琴键重重落下。书架后传来沉重的机关咬合声。", "pauseAfterMs": 550 },
+        { "character": "narrator", "text": "书架缓缓移开，暗格终于暴露在空气中——但里面，已经空空如也。", "pauseAfterMs": 700 }
+      ]
+    },
+    {
+      "id": "attack", "type": "narrative", "title": "失控", "nextNodeId": "blackout",
+      "scene": "/stories/pause-in-the-rain/images/scene-08-evan-attacks.jpg", "music": "ending", "ambience": "rain", "enterSfx": ["cat-hiss"], "transition": "flash",
+      "lines": [
+        { "character": "evan", "text": "知道了又怎么样？在这个暴雨天，没人能来救你！", "pauseAfterMs": 350 },
+        { "character": "narrator", "text": "埃文猛地拔出猎刀。地上的花斑猫瞬间炸毛，双眼在黑暗里反射出诡异的绿光。", "pauseAfterMs": 500 }
+      ]
+    },
+    {
+      "id": "blackout", "type": "narrative", "title": "黑暗中的休止符", "nextNodeId": "ending",
+      "scene": "/stories/pause-in-the-rain/images/scene-09-blackout.jpg", "music": "ending", "ambience": "rain", "enterSfx": ["thunder-strike", "fight", "knife"], "transition": "blackout",
+      "lines": [
+        { "character": "narrator", "text": "惊雷在头顶炸裂，吊灯骤然熄灭。黑暗中传来扭打、衣料撕裂，还有刀刃刺入肉体的闷响。", "pauseAfterMs": 900 },
+        { "character": "narrator", "text": "三秒后，只剩下沉重的喘息。", "pauseAfterMs": 1100 }
+      ]
+    },
+    {
+      "id": "ending", "type": "ending", "title": "尾声", "nextNodeId": null,
+      "scene": "/stories/pause-in-the-rain/images/scene-10-ending.jpg", "music": "ending", "ambience": "rain", "enterSfx": ["cat-purr"], "transition": "flash",
+      "message": "故事结束",
+      "lines": [
+        { "character": "narrator", "text": "闪电再次划过。埃文捂着脖子倒在血泊中，里斯握着那把沾血的猎刀，沉默地站在他面前。", "pauseAfterMs": 650 },
+        { "character": "narrator", "text": "花斑猫慢慢走到尸体旁，重新趴下。那规律而诡异的呼噜声，再一次填满了房间。", "pauseAfterMs": 900 }
+      ]
+    }
+  ]
+}

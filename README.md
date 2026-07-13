@@ -1,0 +1,53 @@
+# 暴雨中的休止符
+
+一个 JSON 配置驱动的桌面端悬疑故事网页游戏。剧情自动播放，使用浏览器本地语音朗诵，并包含找不同、点击线索和键盘 QTE 三类小游戏。
+
+## 本地运行
+
+需要 Node.js 20 或更高版本。
+
+```bash
+npm install
+npm run dev
+```
+
+打开终端显示的地址，通常是 `http://localhost:5173`。如果端口已被占用，Vite 会自动选择下一个端口。
+
+生产检查：
+
+```bash
+npm run typecheck
+npm test
+npm run build
+npm run preview
+```
+
+## 操作
+
+- 首次点击“开始故事”后，浏览器才允许播放音乐和朗诵。
+- 剧情会自动朗读并推进；可以暂停、继续或跳过当前朗诵。
+- 左上角“故事”按钮可以回到已解锁节点，未解锁节点不能越级进入。
+- 右上角“设置”可以分别调整朗诵、音效和音乐音量，并为角色选择本机声音。
+- 三类小游戏均限时 60 秒、最多 3 次错误；失败后可无限重试。
+- 进度和设置保存在当前浏览器的 `localStorage` 中。
+
+## 新增故事
+
+1. 在 `public/stories/<story-id>/` 新建 `story.json`、`images/` 和 `audio/`。
+2. 根据 `src/schemas/story.ts` 填写角色、音频和线性节点。
+3. 将故事入口加入 `public/stories/index.json`。
+4. 所有点击区域使用相对坐标 `x/y/width/height`，范围为 `0–1`。
+5. 运行 `npm test && npm run build`，配置引用不存在节点时构建测试会失败。
+
+节点类型：`narrative`、`object-hunt`、`spot-difference`、`keyboard-qte` 和 `ending`。应用组件不包含首发故事台词或答案，替换 JSON 即可增加内容。
+
+## 部署
+
+项目包含 `vercel.json`，可以将仓库导入 Vercel，构建命令使用 `npm run build`，输出目录使用 `dist`。本地版本不依赖账号、数据库或 API 密钥。
+
+## 浏览器限制
+
+- 仅适配宽度至少 1100px 的电脑浏览器，优先 Chrome 和 Edge。
+- 本地语音的音色与暂停恢复行为取决于操作系统和浏览器；没有中文声音时仍可只看字幕。
+- 清理站点数据、更换浏览器或设备会丢失本地存档。
+- 静态 JSON 会包含小游戏答案坐标，第一版不提供防作弊能力。
