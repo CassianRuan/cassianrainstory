@@ -15,6 +15,8 @@ describe('story schema', () => {
       const quiz = result.data.nodes.find((node) => node.type === 'quiz')
       expect(quiz?.questionImage).toContain('bridge-quiz-question.jpg')
       expect(quiz?.correctOptionId).toBe('d')
+      const firstConfrontationNode = result.data.nodes.find((node) => node.music === 'confrontation')
+      expect(firstConfrontationNode?.id).toBe('rees-enters')
     }
   })
 

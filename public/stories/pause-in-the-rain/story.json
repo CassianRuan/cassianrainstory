@@ -87,7 +87,7 @@
     },
     {
       "id": "road-departure", "type": "narrative", "title": "雨夜公路", "nextNodeId": "night-drive",
-      "scene": "/stories/pause-in-the-rain/images/prologue/road-01-car-chase.jpg", "music": "confrontation", "ambience": "rain", "enterSfx": ["car-start"], "loopSfx": ["engine-loop", "wet-road-loop", "wipers-loop"], "transition": "flash",
+      "scene": "/stories/pause-in-the-rain/images/prologue/road-01-car-chase.jpg", "music": "investigation", "ambience": "rain", "enterSfx": ["car-start"], "loopSfx": ["engine-loop", "wet-road-loop", "wipers-loop"], "transition": "flash",
       "lines": [
         { "character": "narrator", "text": "黑色轿车的引擎轰然启动。里斯驶上通往旧城区的荒郊公路，雨刮器在挡风玻璃前疯狂摆动。", "pauseAfterMs": 650 },
         { "character": "narrator", "text": "车灯撕开雨幕，前方不断滚落的碎石和倒木迫使他紧握方向盘。", "pauseAfterMs": 700 }
@@ -95,7 +95,7 @@
     },
     {
       "id": "night-drive", "type": "road-runner", "title": "暴雨疾驰", "nextNodeId": "bridge-stop",
-      "scene": "/stories/pause-in-the-rain/images/prologue/road-02-runner-background.jpg", "music": "confrontation", "ambience": "rain", "enterSfx": [], "loopSfx": ["engine-loop", "wet-road-loop", "wipers-loop"], "transition": "push",
+      "scene": "/stories/pause-in-the-rain/images/prologue/road-02-runner-background.jpg", "music": "investigation", "ambience": "rain", "enterSfx": [], "loopSfx": ["engine-loop", "wet-road-loop", "wipers-loop"], "transition": "push",
       "intro": "使用方向键或 A / D 变换车道，避开落石、路障与倒木，抵达旧城区。",
       "rules": { "timeLimitSec": 60, "maxMistakes": 3 }, "goalDistance": 1200,
       "obstacles": [
@@ -109,14 +109,14 @@
     },
     {
       "id": "bridge-stop", "type": "narrative", "title": "紧急刹车", "nextNodeId": "broken-bridge",
-      "scene": "/stories/pause-in-the-rain/images/prologue/bridge-01-car-stops.jpg", "music": "confrontation", "ambience": "rain", "enterSfx": ["car-brake"], "loopSfx": ["flood-loop"], "transition": "flash",
+      "scene": "/stories/pause-in-the-rain/images/prologue/bridge-01-car-stops.jpg", "music": "investigation", "ambience": "rain", "enterSfx": ["car-brake"], "loopSfx": ["flood-loop"], "transition": "flash",
       "lines": [
         { "character": "narrator", "text": "刺耳的刹车声划破雨夜。黑色轿车猛地停在圣马丁石桥前，轮胎在积水中拖出长长的痕迹。", "pauseAfterMs": 650 }
       ]
     },
     {
       "id": "broken-bridge", "type": "narrative", "title": "断桥", "nextNodeId": "bridge-quiz",
-      "scene": "/stories/pause-in-the-rain/images/prologue/bridge-02-broken-bridge.jpg", "music": "confrontation", "ambience": "rain", "enterSfx": [], "loopSfx": ["flood-loop"], "transition": "push",
+      "scene": "/stories/pause-in-the-rain/images/prologue/bridge-02-broken-bridge.jpg", "music": "investigation", "ambience": "rain", "enterSfx": [], "loopSfx": ["flood-loop"], "transition": "push",
       "lines": [
         { "character": "narrator", "text": "车灯直射前方。原本连接两岸的石桥，中央已经被洪水和泥流彻底冲毁。前方，无路可走。", "pauseAfterMs": 550 },
         { "character": "rees", "text": "该死！桥断了……我要怎样过桥？", "pauseAfterMs": 650 }
@@ -124,7 +124,7 @@
     },
     {
       "id": "bridge-quiz", "type": "quiz", "title": "应急桥梁验证", "nextNodeId": "bridge-rising",
-      "scene": "/stories/pause-in-the-rain/images/prologue/bridge-02-broken-bridge.jpg", "music": "confrontation", "ambience": "rain", "enterSfx": ["terminal-activate"], "loopSfx": ["flood-loop"], "transition": "blackout",
+      "scene": "/stories/pause-in-the-rain/images/prologue/bridge-02-broken-bridge.jpg", "music": "investigation", "ambience": "rain", "enterSfx": ["terminal-activate"], "loopSfx": ["flood-loop"], "transition": "blackout",
       "intro": "雨幕中，一台老旧的应急桥控制器亮起。只有解开校验题，机械桥才会启动。",
       "question": "观察九宫格中桥墩与水流闸门的变化规律，从 A、B、C、D 中选择缺失图形。",
       "questionImage": "/stories/pause-in-the-rain/images/bridge-quiz-question.jpg",
@@ -135,7 +135,7 @@
     },
     {
       "id": "bridge-rising", "type": "narrative", "title": "机械桥升起", "nextNodeId": "bridge-crossing",
-      "scene": "/stories/pause-in-the-rain/images/prologue/bridge-03-mechanical-rise.jpg", "music": "confrontation", "ambience": "rain", "enterSfx": ["bridge-rise"], "loopSfx": ["flood-loop"], "transition": "flash",
+      "scene": "/stories/pause-in-the-rain/images/prologue/bridge-03-mechanical-rise.jpg", "music": "investigation", "ambience": "rain", "enterSfx": ["bridge-rise"], "loopSfx": ["flood-loop"], "transition": "flash",
       "lines": [
         { "character": "rees", "text": "该死，我当警察可不是为了来算数学题的。", "pauseAfterMs": 450 },
         { "character": "narrator", "text": "车窗外响起沉重的轰鸣。一座临时应急机械桥从断桥下方升起，严丝合缝地连接两岸。", "pauseAfterMs": 800, "sfx": "bridge-lock" }
@@ -143,7 +143,7 @@
     },
     {
       "id": "bridge-crossing", "type": "narrative", "title": "冲过断桥", "nextNodeId": "arrival",
-      "scene": "/stories/pause-in-the-rain/images/prologue/bridge-04-car-crossing.jpg", "music": "confrontation", "ambience": "rain", "enterSfx": ["car-accelerate"], "loopSfx": ["flood-loop"], "transition": "push",
+      "scene": "/stories/pause-in-the-rain/images/prologue/bridge-04-car-crossing.jpg", "music": "investigation", "ambience": "rain", "enterSfx": ["car-accelerate"], "loopSfx": ["flood-loop"], "transition": "push",
       "lines": [
         { "character": "narrator", "text": "里斯猛踩油门。黑色轿车化作一道闪电，冲过桥梁，消失在旧城区的暴雨迷雾中。", "pauseAfterMs": 850, "sfx": "car-pass" }
       ]
@@ -166,7 +166,7 @@
     },
     {
       "id": "rees-enters", "type": "narrative", "title": "侦探入场", "nextNodeId": "spot-difference",
-      "scene": "/stories/pause-in-the-rain/images/scene-03-rees-enters.png", "music": "investigation", "ambience": "rain", "enterSfx": ["door", "footsteps"], "transition": "fade",
+      "scene": "/stories/pause-in-the-rain/images/scene-03-rees-enters.png", "music": "confrontation", "ambience": "rain", "enterSfx": ["door", "footsteps"], "transition": "fade",
       "lines": [
         { "character": "narrator", "text": "门被猛地推开。里斯探长走进木屋，湿透的风衣滴着水，皮鞋在木地板上留下沉重的印迹。", "pauseAfterMs": 500 },
         { "character": "rees", "text": "有人动过这里。暴雨冲不掉房间里的谎言。", "pauseAfterMs": 700 }
@@ -174,7 +174,7 @@
     },
     {
       "id": "spot-difference", "type": "spot-difference", "title": "被改动的现场", "nextNodeId": "investigation",
-      "scene": "/stories/pause-in-the-rain/images/spot-difference-right.jpg", "music": "investigation", "ambience": "rain", "enterSfx": [], "transition": "fade",
+      "scene": "/stories/pause-in-the-rain/images/spot-difference-right.jpg", "music": "confrontation", "ambience": "rain", "enterSfx": [], "transition": "fade",
       "intro": "对照里斯进入房间前后的记忆，在右图找出 5 处被改动的痕迹。",
       "leftImage": "/stories/pause-in-the-rain/images/spot-difference-left.jpg",
       "rightImage": "/stories/pause-in-the-rain/images/spot-difference-right.jpg",
@@ -189,7 +189,7 @@
     },
     {
       "id": "investigation", "type": "object-hunt", "title": "关键线索", "nextNodeId": "confrontation",
-      "scene": "/stories/pause-in-the-rain/images/scene-04-investigation.jpg", "music": "investigation", "ambience": "fireplace", "enterSfx": [], "transition": "fade",
+      "scene": "/stories/pause-in-the-rain/images/scene-04-investigation.jpg", "music": "confrontation", "ambience": "fireplace", "enterSfx": [], "transition": "fade",
       "intro": "在房间中找出 4 件关键证物。每一次误判，都可能让真相溜走。",
       "rules": { "timeLimitSec": 60, "maxMistakes": 3 },
       "regions": [
