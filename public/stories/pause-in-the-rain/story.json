@@ -3,7 +3,7 @@
   "id": "pause-in-the-rain",
   "title": "暴雨中的休止符",
   "subtitle": "每一声雷鸣，都在掩盖一个谎言",
-  "cover": "/stories/pause-in-the-rain/images/scene-01-cabin-exterior.png",
+  "cover": "/stories/pause-in-the-rain/images/scene-01-cabin-exterior.mp4",
   "startNodeId": "office-call",
   "characters": {
     "narrator": { "name": "旁白", "voiceHints": ["zh-CN", "zh"], "rate": 0.84, "pitch": 0.86 },
@@ -88,7 +88,7 @@
     },
     {
       "id": "road-departure", "type": "narrative", "title": "雨夜公路", "nextNodeId": "night-drive",
-      "scene": "/stories/pause-in-the-rain/images/prologue/road-01-car-chase.jpg", "ambience": "rain", "enterSfx": ["car-start"], "loopSfx": ["engine-loop", "wet-road-loop", "wipers-loop"], "transition": "flash",
+      "scene": "/stories/pause-in-the-rain/images/prologue/carRun.mp4", "sceneLoop": false, "ambience": "rain", "enterSfx": [], "loopSfx": [], "transition": "flash",
       "lines": [
         { "character": "narrator", "text": "黑色轿车的引擎轰然启动。里斯驶上通往旧城区的荒郊公路，雨刮器在挡风玻璃前疯狂摆动。", "pauseAfterMs": 650 },
         { "character": "narrator", "text": "车灯撕开雨幕，前方不断滚落的碎石和倒木迫使他紧握方向盘。", "pauseAfterMs": 700 }
@@ -111,18 +111,10 @@
       }
     },
     {
-      "id": "bridge-stop", "type": "narrative", "title": "紧急刹车", "nextNodeId": "broken-bridge",
-      "scene": "/stories/pause-in-the-rain/images/prologue/bridge-01-car-stops.jpg", "ambience": "rain", "enterSfx": ["car-brake"], "loopSfx": ["flood-loop"], "transition": "flash",
+      "id": "bridge-stop", "type": "narrative", "title": "紧急刹车", "nextNodeId": "bridge-quiz",
+      "scene": "/stories/pause-in-the-rain/images/prologue/carStop.mp4", "sceneLoop": false, "ambience": "rain", "enterSfx": [], "loopSfx": ["flood-loop"], "transition": "flash",
       "lines": [
-        { "character": "narrator", "text": "刺耳的刹车声划破雨夜。黑色轿车猛地停在圣马丁石桥前，轮胎在积水中拖出长长的痕迹。", "pauseAfterMs": 650 }
-      ]
-    },
-    {
-      "id": "broken-bridge", "type": "narrative", "title": "断桥", "nextNodeId": "bridge-quiz",
-      "scene": "/stories/pause-in-the-rain/images/prologue/bridge-02-broken-bridge.jpg", "ambience": "rain", "enterSfx": [], "loopSfx": ["flood-loop"], "transition": "push",
-      "lines": [
-        { "character": "narrator", "text": "车灯直射前方。原本连接两岸的石桥，中央已经被洪水和泥流彻底冲毁。前方，无路可走。", "pauseAfterMs": 550 },
-        { "character": "rees", "text": "该死！桥断了……我要怎样过桥？", "pauseAfterMs": 650 }
+        { "character": "narrator", "text": "刺耳的刹车声划破雨夜。黑色轿车猛地停在圣马丁石桥前。该死！桥断了……我要怎样过河？，里斯怒吼道", "pauseAfterMs": 650 }
       ]
     },
     {
@@ -153,7 +145,7 @@
     },
     {
       "id": "arrival", "type": "narrative", "title": "暴雨来客", "nextNodeId": "crime-scene",
-      "scene": "/stories/pause-in-the-rain/images/scene-01-cabin-exterior.png", "music": "investigation", "ambience": "rain", "enterSfx": ["thunder-distant"], "transition": "flash",
+      "scene": "/stories/pause-in-the-rain/images/scene-01-cabin-exterior.mp4", "music": "investigation", "ambience": "rain", "enterSfx": ["thunder-strike"], "transition": "flash",
       "lines": [
         { "character": "narrator", "text": "暴雨倾盆。闪电划过林间，惨白的光，短暂照亮了那座孤零零的木屋。", "pauseAfterMs": 650 },
         { "character": "narrator", "text": "雨水沿着窗玻璃蜿蜒而下。屋里只有一盏昏黄吊灯，在黑暗中缓慢摇晃。", "pauseAfterMs": 600 }
@@ -161,7 +153,7 @@
     },
     {
       "id": "crime-scene", "type": "narrative", "title": "死亡现场", "nextNodeId": "rees-enters",
-      "scene": "/stories/pause-in-the-rain/images/scene-02-crime-room.png", "music": "investigation", "ambience": "rain", "enterSfx": ["lamp", "cat-purr"], "transition": "push",
+      "scene": "/stories/pause-in-the-rain/images/manDead.mp4", "music": "investigation", "ambience": "rain", "enterSfx": [], "transition": "push",
       "lines": [
         { "character": "narrator", "text": "房间中央，钢琴家阿尔伯特低着头坐在扶手椅上，双手垂落，再也不会碰触琴键。", "pauseAfterMs": 650 },
         { "character": "narrator", "text": "一只花斑猫蜷缩在他的脚边。规律的呼噜声，在死寂中显得格外清晰。", "pauseAfterMs": 550 }
@@ -242,7 +234,7 @@
     },
     {
       "id": "blackout", "type": "narrative", "title": "黑暗中的休止符", "nextNodeId": "ending",
-      "scene": "/stories/pause-in-the-rain/images/scene-09-blackout.jpg", "music": "ending", "ambience": "rain", "enterSfx": ["thunder-strike", "fight", "knife"], "transition": "blackout",
+      "scene": "/stories/pause-in-the-rain/images/battle.mp4", "sceneLoop": false, "music": "ending", "ambience": "rain", "enterSfx": [], "transition": "blackout",
       "lines": [
         { "character": "narrator", "text": "惊雷在头顶炸裂，吊灯骤然熄灭。黑暗中传来扭打、衣料撕裂，还有刀刃刺入肉体的闷响。", "pauseAfterMs": 900 },
         { "character": "narrator", "text": "三秒后，只剩下沉重的喘息。", "pauseAfterMs": 1100 }

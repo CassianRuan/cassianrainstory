@@ -1,6 +1,20 @@
 import type { Story } from '../schemas/story'
 
 let activeUtterance: SpeechSynthesisUtterance | null = null
+let activeResolve: (() => void) | null = null
+let activeTimer: number | null = null
+
+function finishSpeech(utterance?: SpeechSynthesisUtterance): void {
+  if (utterance && utterance !== activeUtterance) return
+  if (activeTimer !== null) {
+    window.clearTimeout(activeTimer)
+    activeTimer = null
+  }
+  activeUtterance = null
+  const resolve = activeResolve
+  activeResolve = null
+  resolve?.()
+}
 
 export function getVoices(): SpeechSynthesisVoice[] {
   return typeof window !== 'undefined' && 'speechSynthesis' in window ? window.speechSynthesis.getVoices() : []
@@ -27,10 +41,12 @@ export function speakLine(options: {
   selectedVoice?: string
 }): Promise<void> {
   cancelSpeech()
-  if (!('speechSynthesis' in window) || options.volume <= 0) {
-    return new Promise((resolve) => window.setTimeout(resolve, Math.max(1200, options.text.length * 115)))
-  }
   return new Promise((resolve) => {
+    activeResolve = resolve
+    if (!('speechSynthesis' in window) || options.volume <= 0) {
+      activeTimer = window.setTimeout(() => finishSpeech(), Math.max(1200, options.text.length * 115))
+      return
+    }
     const character = options.story.characters[options.characterId]
     const utterance = new SpeechSynthesisUtterance(options.text)
     utterance.lang = 'zh-CN'
@@ -38,8 +54,8 @@ export function speakLine(options: {
     utterance.pitch = character?.pitch ?? 1
     utterance.volume = options.volume
     utterance.voice = chooseVoice(options.characterId, options.story, options.selectedVoice) ?? null
-    utterance.onend = () => { activeUtterance = null; resolve() }
-    utterance.onerror = () => { activeUtterance = null; resolve() }
+    utterance.onend = () => finishSpeech(utterance)
+    utterance.onerror = () => finishSpeech(utterance)
     activeUtterance = utterance
     window.speechSynthesis.speak(utterance)
   })
@@ -55,5 +71,5 @@ export function resumeSpeech(): void {
 
 export function cancelSpeech(): void {
   if ('speechSynthesis' in window) window.speechSynthesis.cancel()
-  activeUtterance = null
+  finishSpeech()
 }

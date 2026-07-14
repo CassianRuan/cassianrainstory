@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import type { RunnerNode } from '../schemas/story'
 import { audioManager } from '../audio/audioManager'
 import { GameFrame } from './GameFrame'
@@ -28,7 +28,28 @@ export function RoadRunnerGame({ node, onComplete }: { node: RunnerNode; onCompl
   const [finishLineY, setFinishLineY] = useState<number | null>(null)
   const [invincible, setInvincible] = useState(false)
   const [impact, setImpact] = useState(false)
+  const [isAccelerating, setIsAccelerating] = useState(false)
   const session = useGameSession(node.rules.timeLimitSec, node.rules.maxMistakes, onComplete)
+
+  const lensRain = useMemo(() => {
+    const drops = Array.from({ length: 26 }).map((_, i) => ({
+      id: i,
+      left: `${Math.random() * 90 + 5}%`,
+      top: `${Math.random() * 78 + 6}%`,
+      size: `${Math.random() * 8 + 6}px`,
+      delay: `-${(Math.random() * 4).toFixed(2)}s`,
+      duration: `${(Math.random() * 1.7 + 1.25).toFixed(2)}s`,
+    }))
+    const streaks = Array.from({ length: 6 }).map((_, i) => ({
+      id: i,
+      left: `${Math.random() * 86 + 7}%`,
+      top: `${Math.random() * 44 + 2}%`,
+      height: `${Math.random() * 24 + 22}%`,
+      delay: `-${(Math.random() * 2).toFixed(2)}s`,
+      duration: `${(Math.random() * 0.3 + 0.3).toFixed(2)}s`,
+    }))
+    return { drops, streaks }
+  }, [session.attempt])
 
   const laneRef = useRef<RunnerLane>(1)
   const progressRef = useRef(0)
@@ -41,6 +62,7 @@ export function RoadRunnerGame({ node, onComplete }: { node: RunnerNode; onCompl
   const obstacleIdRef = useRef(0)
   const invincibleUntilRef = useRef(0)
   const slowUntilRef = useRef(0)
+  const isAcceleratingRef = useRef(false)
   const steeringTimerRef = useRef<number | null>(null)
   const feedbackTimerRef = useRef<number | null>(null)
 
@@ -57,6 +79,7 @@ export function RoadRunnerGame({ node, onComplete }: { node: RunnerNode; onCompl
     obstacleIdRef.current = 0
     invincibleUntilRef.current = 0
     slowUntilRef.current = 0
+    isAcceleratingRef.current = false
     setLane(1)
     setSteering(0)
     setRoadOffset(0)
@@ -65,6 +88,7 @@ export function RoadRunnerGame({ node, onComplete }: { node: RunnerNode; onCompl
     setFinishLineY(null)
     setInvincible(false)
     setImpact(false)
+    setIsAccelerating(false)
   }, [node.gracePeriodSec, session.attempt])
 
   const moveLane = useCallback((direction: -1 | 1) => {
@@ -88,9 +112,27 @@ export function RoadRunnerGame({ node, onComplete }: { node: RunnerNode; onCompl
         event.preventDefault()
         moveLane(1)
       }
+      if (event.key === 'ArrowUp' || event.key.toLowerCase() === 'w') {
+        event.preventDefault()
+        if (!isAcceleratingRef.current) {
+          isAcceleratingRef.current = true
+          setIsAccelerating(true)
+        }
+      }
+    }
+    const onKeyUp = (event: KeyboardEvent) => {
+      if (event.key === 'ArrowUp' || event.key.toLowerCase() === 'w') {
+        event.preventDefault()
+        isAcceleratingRef.current = false
+        setIsAccelerating(false)
+      }
     }
     window.addEventListener('keydown', onKeyDown)
-    return () => window.removeEventListener('keydown', onKeyDown)
+    window.addEventListener('keyup', onKeyUp)
+    return () => {
+      window.removeEventListener('keydown', onKeyDown)
+      window.removeEventListener('keyup', onKeyUp)
+    }
   }, [moveLane])
 
   useEffect(() => {
@@ -101,7 +143,8 @@ export function RoadRunnerGame({ node, onComplete }: { node: RunnerNode; onCompl
       lastFrameRef.current = now
       const difficulty = runnerDifficulty(progressRef.current, node.spawnIntervalStartMs, node.spawnIntervalEndMs, node.maxSpeedMultiplier)
       const collisionSlowdown = now < slowUntilRef.current ? 0.6 : 1
-      const effectiveSpeed = difficulty.speedMultiplier * collisionSlowdown
+      const boost = isAcceleratingRef.current ? 2.5 : 1.0
+      const effectiveSpeed = difficulty.speedMultiplier * collisionSlowdown * boost
       const averageSpeed = (1 + node.maxSpeedMultiplier) / 2
 
       roadOffsetRef.current = (roadOffsetRef.current + worldSpeed * effectiveSpeed * deltaSec) % 100
@@ -127,7 +170,8 @@ export function RoadRunnerGame({ node, onComplete }: { node: RunnerNode; onCompl
           ...nextObstacles,
           ...wave.map((item) => ({ id: ++obstacleIdRef.current, lane: item.lane, kind: item.kind, y: -12, hit: false })),
         ]
-        nextSpawnRef.current = now + difficulty.spawnIntervalMs * (0.9 + Math.random() * 0.2)
+        const currentBoost = isAcceleratingRef.current ? 2.5 : 1.0
+        nextSpawnRef.current = now + (difficulty.spawnIntervalMs / currentBoost) * (0.9 + Math.random() * 0.2)
       }
 
       if (now >= invincibleUntilRef.current) {
@@ -184,12 +228,25 @@ export function RoadRunnerGame({ node, onComplete }: { node: RunnerNode; onCompl
             className={`runner-obstacle-sprite ${obstacle.kind} ${obstacle.hit ? 'hit' : ''}`}
             src={node.obstacleImages[obstacle.kind]} alt="" aria-hidden="true"
             style={{ left: `${laneCenters[obstacle.lane]}%`, top: `${obstacle.y}%` }} />)}
-          <img className={`runner-player-car steer-${steering} ${invincible ? 'invincible' : ''}`}
+          <img className={`runner-player-car steer-${steering} ${invincible ? 'invincible' : ''} ${isAccelerating ? 'accelerating' : ''}`}
             src={node.carImage} alt="玩家汽车" style={{ left: `${laneCenters[lane]}%` }} />
         </div>
-        <div className="rain-lines" />
+        <div className="lens-rain-container">
+          {lensRain.streaks.map((streak) => (
+            <div key={streak.id} className="lens-streak" style={{
+              left: streak.left, top: streak.top, height: streak.height,
+              animationDelay: streak.delay, animationDuration: streak.duration
+            }} />
+          ))}
+          {lensRain.drops.map((drop) => (
+            <div key={drop.id} className="lens-drop" style={{
+              left: drop.left, top: drop.top, width: drop.size, height: drop.size,
+              animationDelay: drop.delay, animationDuration: drop.duration
+            }} />
+          ))}
+        </div>
         <div className="runner-distance"><span style={{ width: `${progress * 100}%` }} /><b>{finishLineY === null ? '距离终点' : '终点就在前方'}</b></div>
-        <div className="runner-controls"><kbd>←</kbd><span>快速切换车道</span><kbd>→</kbd></div>
+        <div className="runner-controls"><kbd>↑/W</kbd><span>加速</span><kbd>A/D</kbd><span>切换车道</span></div>
       </div>
     </GameFrame>
   )

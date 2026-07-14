@@ -67,6 +67,7 @@ describe('narration ambience ducking', () => {
 
     fireEvent.click(screen.getByRole('button', { name: '跳过朗诵 ›' }))
 
+    expect(speechMocks.cancelSpeech).toHaveBeenCalled()
     expect(audioMocks.setAmbienceDuck).toHaveBeenLastCalledWith(1)
     expect(onComplete).toHaveBeenCalledOnce()
   })
@@ -77,6 +78,7 @@ describe('narration ambience ducking', () => {
 
     fireEvent.click(screen.getByRole('button', { name: '跳过朗诵 ›' }))
 
+    expect(speechMocks.cancelSpeech).toHaveBeenCalled()
     expect(audioMocks.setAmbienceDuck).toHaveBeenLastCalledWith(1)
     expect(screen.getByText('THE END')).toBeInTheDocument()
   })

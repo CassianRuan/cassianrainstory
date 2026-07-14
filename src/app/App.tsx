@@ -56,7 +56,10 @@ export function App() {
     audioManager.playLoop('music', currentNode.music)
     audioManager.playLoop('ambience', currentNode.ambience)
     audioManager.syncEffectLoops(currentNode.loopSfx)
-    currentNode.enterSfx.forEach((id, index) => window.setTimeout(() => audioManager.playSfx(id), index * 320))
+    const isVideoScene = currentNode.scene.endsWith('.mp4') || currentNode.scene.endsWith('.webm')
+    currentNode.enterSfx
+      .filter((id) => !(isVideoScene && id === 'thunder-strike'))
+      .forEach((id, index) => window.setTimeout(() => audioManager.playSfx(id), index * 320))
     return () => { cancelSpeech() }
   }, [story, currentNode?.id, store.hasStarted])
 

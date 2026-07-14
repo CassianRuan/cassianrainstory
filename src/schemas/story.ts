@@ -22,6 +22,7 @@ const baseNodeSchema = z.object({
   title: z.string().min(1),
   nextNodeId: z.string().nullable(),
   scene: z.string().min(1),
+  sceneLoop: z.boolean().default(true),
   music: z.string().optional(),
   ambience: z.string().optional(),
   enterSfx: z.array(z.string()).default([]),
