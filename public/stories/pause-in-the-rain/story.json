@@ -114,7 +114,7 @@
       "id": "bridge-stop", "type": "narrative", "title": "紧急刹车", "nextNodeId": "bridge-quiz",
       "scene": "/stories/pause-in-the-rain/images/prologue/carStop.mp4", "sceneLoop": false, "ambience": "rain", "enterSfx": [], "loopSfx": ["flood-loop"], "transition": "flash",
       "lines": [
-        { "character": "narrator", "text": "刺耳的刹车声划破雨夜。黑色轿车猛地停在圣马丁石桥前。该死！桥断了……我要怎样过河？，里斯怒吼道", "pauseAfterMs": 650 }
+        { "character": "narrator", "text": "刺耳的刹车声划破雨夜。黑色轿车猛地停在圣马丁石桥前。该死！桥断了……我要怎样过河？里斯怒吼道", "pauseAfterMs": 650 }
       ]
     },
     {
