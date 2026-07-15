@@ -233,10 +233,16 @@
       ]
     },
     {
-      "id": "blackout", "type": "narrative", "title": "黑暗中的休止符", "nextNodeId": "ending",
+      "id": "blackout", "type": "narrative", "title": "黑暗中的休止符", "nextNodeId": "blackout-part2",
       "scene": "/stories/pause-in-the-rain/images/battle.mp4", "sceneLoop": false, "music": "ending", "ambience": "rain", "enterSfx": [], "transition": "blackout",
       "lines": [
-        { "character": "narrator", "text": "惊雷在头顶炸裂，吊灯骤然熄灭。黑暗中传来扭打、衣料撕裂，还有刀刃刺入肉体的闷响。", "pauseAfterMs": 900 },
+        { "character": "narrator", "text": "惊雷在头顶炸裂，吊灯骤然熄灭。黑暗中传来扭打、衣料撕裂，还有刀刃刺入肉体的闷响。", "pauseAfterMs": 900 }
+      ]
+    },
+    {
+      "id": "blackout-part2", "type": "narrative", "title": "死寂", "nextNodeId": "ending",
+      "scene": "/stories/pause-in-the-rain/images/scene-09-blackout.jpg", "music": "ending", "ambience": "rain", "enterSfx": [], "transition": "fade",
+      "lines": [
         { "character": "narrator", "text": "三秒后，只剩下沉重的喘息。", "pauseAfterMs": 1100 }
       ]
     },
