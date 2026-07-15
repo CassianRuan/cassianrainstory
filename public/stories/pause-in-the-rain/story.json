@@ -243,7 +243,8 @@
       "id": "blackout-part2", "type": "narrative", "title": "死寂", "nextNodeId": "ending",
       "scene": "/stories/pause-in-the-rain/images/scene-09-blackout.jpg", "music": "ending", "ambience": "rain", "enterSfx": [], "transition": "fade",
       "lines": [
-        { "character": "narrator", "text": "三秒后，只剩下沉重的喘息。", "pauseAfterMs": 1100 }
+        { "character": "narrator", "text": "三秒后，只剩下沉重的喘息。", "pauseAfterMs": 1100 },
+        { "character": "narrator", "text": "闪电再次划过。埃文捂着脖子倒在血泊中，里斯握着那把沾血的猎刀，沉默地站在他面前。", "pauseAfterMs": 650 }
       ]
     },
     {
@@ -251,7 +252,6 @@
       "scene": "/stories/pause-in-the-rain/images/scene-10-ending.jpg", "music": "ending", "ambience": "rain", "enterSfx": ["cat-purr"], "transition": "flash",
       "message": "故事结束",
       "lines": [
-        { "character": "narrator", "text": "闪电再次划过。埃文捂着脖子倒在血泊中，里斯握着那把沾血的猎刀，沉默地站在他面前。", "pauseAfterMs": 650 },
         { "character": "rees", "text": "雨能冲走血迹，却冲不掉真相留下的回声。", "pauseAfterMs": 850 },
         { "character": "narrator", "text": "花斑猫慢慢走到尸体旁，重新趴下。那规律而诡异的呼噜声，再一次填满了房间。", "pauseAfterMs": 900 }
       ]
